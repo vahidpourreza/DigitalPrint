@@ -114,7 +114,7 @@ public class Product : BaseEntity<Guid>
             });
         if (!isValid)
         {
-            throw new InvalidEntityStateException(this, $"مقدار تنظیم شده برای آگهی در وضیعت {ProductStatus.GetDescription()} غیر قابل قبول است");
+            throw new InvalidEntityStateException(this, $"مقدار تنظیم شده برای آگهی در وضیعت {Status.GetDescription()} غیر قابل قبول است");
         }
     }
 }
