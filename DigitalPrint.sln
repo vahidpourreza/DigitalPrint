@@ -5,7 +5,19 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Core", "01.Core", "{8CD81915-063D-49F7-BFCE-B6A87D2F771A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalPrint.Core.Domain", "01.Core\DigitalPrint.Core.Domain\DigitalPrint.Core.Domain.csproj", "{924A1214-6AD8-42D4-8C7F-0848C82F8918}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalPrint.Core.Domain", "01.Core\DigitalPrint.Core.Domain\DigitalPrint.Core.Domain.csproj", "{924A1214-6AD8-42D4-8C7F-0848C82F8918}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Framework", "00.Framework", "{F0493293-4936-442B-A01E-C3F392549AD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Domain", "00.Framework\Framework.Domain\Framework.Domain.csproj", "{9C3AE88D-E8DA-4B79-861F-D49F166389EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infrastructures", "02.Infrastructures", "{50610F1C-36DB-40C2-B3EA-1C4C192441C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.EndPoint", "03.EndPoint", "{627D1368-D13D-4304-92CC-5D1ADA8C48E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalPrint.EndPoint.API", "03.EndPoint\DigitalPrint.EndPoint.API\DigitalPrint.EndPoint.API.csproj", "{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Tools", "00.Framework\Framework.Tools\Framework.Tools.csproj", "{0EB114E0-275C-4963-9372-F9953E99178D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +29,27 @@ Global
 		{924A1214-6AD8-42D4-8C7F-0848C82F8918}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{924A1214-6AD8-42D4-8C7F-0848C82F8918}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{924A1214-6AD8-42D4-8C7F-0848C82F8918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C3AE88D-E8DA-4B79-861F-D49F166389EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C3AE88D-E8DA-4B79-861F-D49F166389EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C3AE88D-E8DA-4B79-861F-D49F166389EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C3AE88D-E8DA-4B79-861F-D49F166389EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB114E0-275C-4963-9372-F9953E99178D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB114E0-275C-4963-9372-F9953E99178D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB114E0-275C-4963-9372-F9953E99178D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB114E0-275C-4963-9372-F9953E99178D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{924A1214-6AD8-42D4-8C7F-0848C82F8918} = {8CD81915-063D-49F7-BFCE-B6A87D2F771A}
+		{9C3AE88D-E8DA-4B79-861F-D49F166389EC} = {F0493293-4936-442B-A01E-C3F392549AD7}
+		{7E6D2CE7-FA26-4EC7-8AE7-87EDF60DB083} = {627D1368-D13D-4304-92CC-5D1ADA8C48E8}
+		{0EB114E0-275C-4963-9372-F9953E99178D} = {F0493293-4936-442B-A01E-C3F392549AD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EEA092C-87FB-4600-ABED-897883D732D3}
