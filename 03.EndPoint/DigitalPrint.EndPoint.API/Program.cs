@@ -17,7 +17,10 @@ builder.Services.AddSwaggerGen(c =>{c.SwaggerDoc("v1", new OpenApiInfo { Title =
 builder.Services.AddScoped<IProductsRepository, EfProductsRepository>();
 builder.Services.AddScoped(c => new SqlConnection(builder.Configuration.GetConnectionString("ProductCnn")));
 builder.Services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
-builder.Services.AddDbContext<ProductDbContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("ProductCnn")));
+
+builder.Services.AddDbContext<ProductDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductCnn")));
+
 builder.Services.AddScoped<CreateHandler>();
 builder.Services.AddScoped<SetTitleHandler>();
 builder.Services.AddScoped<UpdateDescriptionHandler>();

@@ -11,7 +11,7 @@ public class Product : BaseEntity<Guid>
 {
     public UserId CreatorId { get; private set; }
     public ProductTitle Title { get; private set; }
-    public ProductPlacard Placard { get; private set; }
+   // public ProductPlacard Placard { get; private set; }
     public ProductDescription Description { get; private set; }
     public int CreateDurationTime { get; private set; }
     public ProductPrice Price { get; private set; }
