@@ -20,4 +20,8 @@
     <ProjectReference Include="..\..\02.Infrastructures\Data\DigitalPrint.Infrastructures.Data.SqlServer\DigitalPrint.Infrastructures.Data.SqlServer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

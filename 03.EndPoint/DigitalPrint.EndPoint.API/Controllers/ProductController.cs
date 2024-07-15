@@ -8,8 +8,6 @@ namespace DigitalPrint.EndPoint.API.Controllers
     [Route("[controller]")]
     public class AddvertismentController : ControllerBase
     {
-
-
         [HttpPost]
         public IActionResult Post([FromServices] CreateHandler handler, Create request)
         {
