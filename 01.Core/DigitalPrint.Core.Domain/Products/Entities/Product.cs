@@ -30,6 +30,10 @@ public class Product : BaseAggregateRoot<Guid>
         });
     }
 
+    private Product()
+    {
+        
+    }
 
     public void SetTitle(ProductTitle title)
     {
