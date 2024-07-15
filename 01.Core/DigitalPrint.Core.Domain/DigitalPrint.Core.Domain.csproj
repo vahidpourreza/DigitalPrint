@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Products\DTOs\" />
     <Folder Include="UserProfiles\Commands\" />
     <Folder Include="UserProfiles\Entities\" />
     <Folder Include="UserProfiles\Events\" />
