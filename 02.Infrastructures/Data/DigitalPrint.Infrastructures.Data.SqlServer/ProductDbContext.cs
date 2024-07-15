@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using DigitalPrint.Core.Domain.UserProfiles.Entities;
 
 namespace DigitalPrint.Infrastructures.Data.SqlServer;
 
@@ -20,6 +21,6 @@ public class ProductDbContext : DbContext
     }
 
     public DbSet<Core.Domain.Products.Entities.Product> Products { get; set; }
-
+    public DbSet<UserProfile> UserProfiles { get; set; }
 
 }

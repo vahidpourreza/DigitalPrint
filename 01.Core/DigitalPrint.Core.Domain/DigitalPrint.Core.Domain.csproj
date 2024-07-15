@@ -11,4 +11,11 @@
     <ProjectReference Include="..\..\00.Framework\Framework.Tools\Framework.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UserProfiles\Commands\" />
+    <Folder Include="UserProfiles\Entities\" />
+    <Folder Include="UserProfiles\Events\" />
+    <Folder Include="UserProfiles\ValueObjects\" />
+  </ItemGroup>
+
 </Project>
