@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="ApplicationServices\" />
-    <Folder Include="Data\" />
+    <Folder Include="Product\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Core\DigitalPrint.Core.Domain\DigitalPrint.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

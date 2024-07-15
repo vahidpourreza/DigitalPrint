@@ -6,3 +6,4 @@ public class ProductSentForPublish : IEvent
 {
     public Guid Id { get; set; }
 }
+

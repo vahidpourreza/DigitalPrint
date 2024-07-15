@@ -27,6 +27,8 @@ public class Product : BaseEntity<Guid>
             CreatorId = creatorId.Value
         });
     }
+
+
     public void SetTitle(ProductTitle title)
     {
         HandleEvent(new ProductTitleUpdated()
@@ -36,7 +38,6 @@ public class Product : BaseEntity<Guid>
 
         });
     }
-
     public void UpdateDescription(ProductDescription description)
     {
         HandleEvent(new ProductDescriptionUpdated()
@@ -45,7 +46,6 @@ public class Product : BaseEntity<Guid>
             Description = description.Value
         });
     }
-
     public void UpdatePrice(ProductPrice price)
     {
         HandleEvent(new ProductPriceUpdated()
@@ -55,7 +55,6 @@ public class Product : BaseEntity<Guid>
         });
 
     }
-
     public void RequestForPublish()
     {
         HandleEvent(new ProductSentForPublish()
@@ -63,8 +62,6 @@ public class Product : BaseEntity<Guid>
             Id = Id,
         });
     }
-
-
     protected override void SetStateByEvent(IEvent @event)
     {
 
@@ -93,7 +90,6 @@ public class Product : BaseEntity<Guid>
                 throw new InvalidOperationException("امکان اجرای عملیات درخواستی وجود ندارد");
         }
     }
-
     protected override void ValidateInvariants()
     {
         var isValid =

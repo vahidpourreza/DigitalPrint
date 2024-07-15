@@ -1,13 +1,20 @@
+using DigitalPrint.Core.ApplicationServices.Product.CommandHandlers;
+using DigitalPrint.Core.Domain.Products.Data;
+using DigitalPrint.Infrastructures.Data.InMemory.Product;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>{c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product", Version = "v1" });});
+builder.Services.AddScoped<IProductsRepository, InMemoryProdcutsRepository>();
+
+builder.Services.AddScoped<CreateHandler>();
+builder.Services.AddScoped<SetTitleHandler>();
+builder.Services.AddScoped<UpdateDescriptionHandler>();
+builder.Services.AddScoped<UpdatePriceHandler>();
+builder.Services.AddScoped<SendToPublishHandler>();
 
 var app = builder.Build();
 

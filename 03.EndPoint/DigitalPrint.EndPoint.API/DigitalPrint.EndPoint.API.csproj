@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Core\DigitalPrint.Core.ApplicationServices\DigitalPrint.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\02.Infrastructures\Data\DigitalPrint.Infrastructures.Data.InMemory\DigitalPrint.Infrastructures.Data.InMemory.csproj" />
+  </ItemGroup>
+
 </Project>
