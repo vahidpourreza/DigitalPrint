@@ -2,19 +2,29 @@ using DigitalPrint.Core.ApplicationServices.Product.CommandHandlers;
 using DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers;
 using DigitalPrint.Core.Domain.Products.Data;
 using DigitalPrint.Core.Domain.UserProfiles.Data;
+using DigitalPrint.Infrastructures.Data.EventStore;
 using DigitalPrint.Infrastructures.Data.SqlServer;
 using DigitalPrint.Infrastructures.Data.SqlServer.Product;
 using DigitalPrint.Infrastructures.Data.SqlServer.UserProfiles;
+using EventStore.ClientAPI;
 using Framework.Domain.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ProtoBuf.Meta;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product", Version = "v1" }); });
+
+var esConnection = EventStoreConnection.Create(builder.Configuration["EventStore:ConnectionString"], ConnectionSettings.Create().KeepReconnecting(), builder.Environment.ApplicationName);
+esConnection.ConnectAsync().Wait();
+var store = new DigitalPrintEventSource(esConnection);
+builder.Services.AddSingleton(esConnection);
+builder.Services.AddSingleton<IEventSource>(store);
+
 
 builder.Services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
 

@@ -2,7 +2,7 @@
 
 namespace Framework.Domain.Entities;
 
-public abstract class BaseAggregateRoot<TId> where TId  : IEquatable<TId>
+public abstract class BaseAggregateRoot<TId>
 {
 
     private readonly List<IEvent> _events;
