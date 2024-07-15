@@ -1,6 +1,10 @@
 using DigitalPrint.Core.ApplicationServices.Product.CommandHandlers;
 using DigitalPrint.Core.Domain.Products.Data;
-using DigitalPrint.Infrastructures.Data.InMemory.Product;
+using DigitalPrint.Infrastructures.Data.SqlServer;
+using DigitalPrint.Infrastructures.Data.SqlServer.Product;
+using Framework.Domain.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>{c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product", Version = "v1" });});
-builder.Services.AddScoped<IProductsRepository, InMemoryProdcutsRepository>();
 
+//builder.Services.AddScoped<IProductsRepository, InMemoryProdcutsRepository>();
+builder.Services.AddScoped<IProductsRepository, EfProductsRepository>();
+builder.Services.AddScoped(c => new SqlConnection(builder.Configuration.GetConnectionString("ProductCnn")));
+builder.Services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
+builder.Services.AddDbContext<ProductDbContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("ProductCnn")));
 builder.Services.AddScoped<CreateHandler>();
 builder.Services.AddScoped<SetTitleHandler>();
 builder.Services.AddScoped<UpdateDescriptionHandler>();
