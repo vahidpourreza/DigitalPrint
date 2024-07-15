@@ -17,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product", Version = "v1" }); });
 
 builder.Services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
+
+builder.Services.AddScoped<IProductQueryService, SqlProductQueryService>();
 builder.Services.AddScoped(c => new SqlConnection(builder.Configuration.GetConnectionString("ProductCnn")));
 
 
