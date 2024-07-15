@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalPrint.Infrastructures.Data.SqlServer.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20240715074615_init-db")]
-    partial class initdb
+    [Migration("20240715082522_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

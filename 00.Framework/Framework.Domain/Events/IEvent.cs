@@ -1,6 +1,6 @@
 ﻿namespace Framework.Domain.Events;
 
-public class IEvent
+public interface IEvent
 {
     
 }

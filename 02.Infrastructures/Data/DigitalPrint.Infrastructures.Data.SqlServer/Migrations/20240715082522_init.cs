@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DigitalPrint.Infrastructures.Data.SqlServer.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

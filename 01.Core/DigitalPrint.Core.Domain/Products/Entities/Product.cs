@@ -7,7 +7,7 @@ using Framework.Tools.Enums;
 
 namespace DigitalPrint.Core.Domain.Products.Entities;
 
-public class Product : BaseEntity<Guid>
+public class Product : BaseAggregateRoot<Guid>
 {
     public UserId CreatorId { get; private set; }
     public ProductTitle Title { get; private set; }
@@ -18,10 +18,12 @@ public class Product : BaseEntity<Guid>
     public DateTime CreationDate { get; private set; }
     public bool IsDeleted { get; private set; }
     public ProductStatus Status { get; private set; }
+    public List<Picture> Pictures { get; private set; }
 
     public Product(Guid id, UserId creatorId)
     {
-        HandleEvent(new ProductCreated()
+        Pictures = new List<Picture>();
+        HandleEvent(new ProductCreated
         {
             Id = id,
             CreatorId = creatorId.Value
@@ -62,6 +64,29 @@ public class Product : BaseEntity<Guid>
             Id = Id,
         });
     }
+    public void AddPicture(Uri pictureUri, PictureSize size)
+    {
+        var newPic = new Picture(HandleEvent);
+        newPic.HandleEvent(new PictureAddedToProduct()
+        {
+            PictureId = new Guid(),
+            ClassifiedAdId = Id,
+            Url = pictureUri.ToString(),
+            Height = size.Height,
+            Width = size.Width
+        });
+        Pictures.Add(newPic);
+    }
+    public void ResizePicture(Guid pictureId, PictureSize newSize)
+    {
+        var picture = FindPicture(pictureId);
+        if (picture == null)
+            throw new InvalidOperationException(
+                "تصویری با شناسه وارد شده وجود برای تغییر سایز وجود ندارد");
+        picture.Resize(newSize);
+    }
+    private Picture FindPicture(Guid id) => Pictures.FirstOrDefault(x => x.Id == id);
+
     protected override void SetStateByEvent(IEvent @event)
     {
 
