@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.ValueObjects;
 
-namespace DigitalPrint.Core.Domain.Products.ValueObjects;
+namespace DigitalPrint.Core.Domain.Shared.ValueObjects;
 
 public class Rial : BaseValueObject<Rial>
 {

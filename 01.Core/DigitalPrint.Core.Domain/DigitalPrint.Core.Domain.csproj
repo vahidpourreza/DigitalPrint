@@ -12,6 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Orders\Commands\" />
+    <Folder Include="Orders\Data\" />
+    <Folder Include="Orders\DTOs\" />
+    <Folder Include="Orders\Entities\" />
+    <Folder Include="Orders\Enums\" />
+    <Folder Include="Orders\Events\" />
+    <Folder Include="Orders\ValueObjects\" />
     <Folder Include="Products\DTOs\" />
     <Folder Include="UserProfiles\Commands\" />
     <Folder Include="UserProfiles\Entities\" />

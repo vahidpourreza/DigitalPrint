@@ -5,6 +5,7 @@ using DigitalPrint.Core.Domain.Products.Events;
 using Framework.Domain.Events;
 using Framework.Tools.Enums;
 using DigitalPrint.Core.Domain.Products.Enums;
+using DigitalPrint.Core.Domain.Shared.ValueObjects;
 
 namespace DigitalPrint.Core.Domain.Products.Entities;
 

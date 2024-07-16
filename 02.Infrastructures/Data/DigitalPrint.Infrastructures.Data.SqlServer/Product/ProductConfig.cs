@@ -1,6 +1,7 @@
 ﻿using DigitalPrint.Core.Domain.Products.ValueObjects;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using DigitalPrint.Core.Domain.Shared.ValueObjects;
 
 namespace DigitalPrint.Infrastructures.Data.SqlServer.Product;
 

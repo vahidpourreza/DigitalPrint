@@ -1,6 +1,7 @@
 ﻿using DigitalPrint.Core.Domain.Products.Commands;
 using DigitalPrint.Core.Domain.Products.Data;
 using DigitalPrint.Core.Domain.Products.ValueObjects;
+using DigitalPrint.Core.Domain.Shared.ValueObjects;
 using Framework.Domain.ApplicationServices;
 using Framework.Domain.Data;
 

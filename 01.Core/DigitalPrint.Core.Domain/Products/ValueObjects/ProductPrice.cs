@@ -1,4 +1,5 @@
-﻿using Framework.Domain.ValueObjects;
+﻿using DigitalPrint.Core.Domain.Shared.ValueObjects;
+using Framework.Domain.ValueObjects;
 
 namespace DigitalPrint.Core.Domain.Products.ValueObjects;
 
