@@ -4,63 +4,47 @@ using Framework.Domain.Exceptions;
 using DigitalPrint.Core.Domain.Products.Events;
 using Framework.Domain.Events;
 using Framework.Tools.Enums;
+using DigitalPrint.Core.Domain.Products.Enums;
 
 namespace DigitalPrint.Core.Domain.Products.Entities;
 
 public class Product : BaseAggregateRoot<Guid>
 {
+
+    #region Fields
     public UserId CreatorId { get; private set; }
     public ProductTitle Title { get; private set; }
-   // public ProductPlacard Placard { get; private set; }
     public ProductDescription Description { get; private set; }
-    public int CreateDurationTime { get; private set; }
     public ProductPrice Price { get; private set; }
+    public ProductCategory Category { get; private set; }
     public DateTime CreationDate { get; private set; }
     public bool IsDeleted { get; private set; }
     public ProductStatus Status { get; private set; }
     public List<Picture> Pictures { get; private set; }
+    #endregion
 
-    public Product(Guid id, UserId creatorId)
+    #region Constructors
+    public Product(Guid id, UserId creatorId, ProductTitle title, ProductDescription description, ProductCategory category, ProductPrice price)
     {
         Pictures = new List<Picture>();
         HandleEvent(new ProductCreated
         {
             Id = id,
-            CreatorId = creatorId.Value
+            CreatorId = creatorId.Value,
+            Price = price.Value.Value,
+            Category = category.Value,
+            Title = title.Value,
+            Description = description.Value,
         });
     }
 
     private Product()
     {
-        
-    }
-
-    public void SetTitle(ProductTitle title)
-    {
-        HandleEvent(new ProductTitleUpdated()
-        {
-            Id = Id,
-            Title = title.Value
-
-        });
-    }
-    public void UpdateDescription(ProductDescription description)
-    {
-        HandleEvent(new ProductDescriptionUpdated()
-        {
-            Id = Id,
-            Description = description.Value
-        });
-    }
-    public void UpdatePrice(ProductPrice price)
-    {
-        HandleEvent(new ProductPriceUpdated()
-        {
-            Id = Id,
-            Price = price.Value.Value
-        });
 
     }
+    #endregion
+
+
     public void RequestForPublish()
     {
         HandleEvent(new ProductSentForPublish()
@@ -99,16 +83,11 @@ public class Product : BaseAggregateRoot<Guid>
             case ProductCreated e:
                 Id = e.Id;
                 CreatorId = new UserId(e.CreatorId);
-                Status = ProductStatus.Inactive;
-                break;
-            case ProductTitleUpdated e:
                 Title = new ProductTitle(e.Title);
-                break;
-            case ProductDescriptionUpdated e:
                 Description = new ProductDescription(e.Description);
-                break;
-            case ProductPriceUpdated e:
+                Category = new ProductCategory(e.Category);
                 Price = new ProductPrice(Rial.FromLong(e.Price));
+                Status = ProductStatus.Inactive;
                 break;
             case ProductSentForPublish e:
                 Status = ProductStatus.PublishPending;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace DigitalPrint.Core.Domain.Products.Entities;
+namespace DigitalPrint.Core.Domain.Products.Enums;
 
 public enum ProductStatus
 {

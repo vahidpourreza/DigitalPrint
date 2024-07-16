@@ -14,17 +14,17 @@ public class CreateHandler : ICommandHandler<Create>
 
     public CreateHandler(IUnitOfWork unitOfWork, IProductsRepository productsRepository)
     {
-        this._productsRepository = productsRepository;
-        this._unitOfWork = unitOfWork;
+        _productsRepository = productsRepository;
+        _unitOfWork = unitOfWork;
     }
     public void Handle(Create command)
     {
         if (_productsRepository.Exists(command.Id))
             throw new InvalidOperationException($"قبلا محصول با شناسه {command.Id} ثبت شده است.");
 
-        var product = new Domain.Products.Entities.Product(command.Id,
-            new UserId(command.CreatorId)
-        );
+        var product = new Domain.Products.Entities.Product(command.Id, new UserId(command.CreatorId),
+                                                          ProductTitle.FromString(command.Title), ProductDescription.FromString(command.Description),
+                                                          ProductCategory.FromString(command.Category), ProductPrice.FromLong(command.Price));
         _productsRepository.Add(product);
         _unitOfWork.Commit();
     }

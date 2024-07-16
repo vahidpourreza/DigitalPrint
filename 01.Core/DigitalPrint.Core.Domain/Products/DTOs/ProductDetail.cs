@@ -7,5 +7,5 @@ public class ProductDetail
     public long Price { get; set; }
     public string Description { get; set; }
     public string SellersDisplayName { get; set; }
-    public string[] PhotoUrls { get; set; }
+    public string PhotoUrls { get; set; }
 }

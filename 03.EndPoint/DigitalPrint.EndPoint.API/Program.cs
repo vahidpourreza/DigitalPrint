@@ -36,9 +36,6 @@ builder.Services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IProductsRepository, EfProductsRepository>();
 builder.Services.AddScoped<CreateHandler>();
-builder.Services.AddScoped<SetTitleHandler>();
-builder.Services.AddScoped<UpdateDescriptionHandler>();
-builder.Services.AddScoped<UpdatePriceHandler>();
 builder.Services.AddScoped<SendToPublishHandler>();
 
 builder.Services.AddScoped<IUserProfileRepository, EfUserProfileRepository>();

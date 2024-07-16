@@ -13,7 +13,7 @@ public class UserProfileConfig : IEntityTypeConfiguration<UserProfile>
         builder.Property(c => c.FirstName).HasConversion(c => c.Value, d => FirstName.FromString(d));
         builder.Property(c => c.LastName).HasConversion(c => c.Value, d => LastName.FromString(d));
         builder.Property(c => c.DisplayName).HasConversion(c => c.Value, d => DisplayName.FromString(d));
-        builder.Property(c => c.Email).HasConversion(c => c.Value, d => Email.FromString(d));
+        builder.Property(c => c.Email).HasConversion(c => c.Value, d => Email.FromString(d)).IsRequired(false);
 
     }
 }

@@ -88,6 +88,8 @@ public class UserProfile : BaseAggregateRoot<Guid>
 
     protected override void ValidateInvariants()
     {
-        //Impliment invariants
+        //
+        //TODO
+        //
     }
 }

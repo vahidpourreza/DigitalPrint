@@ -37,7 +37,7 @@ public class EventAggregateStore : IAggregateStore
 
         await _connection.AppendToStreamAsync(
             streamName,
-            aggregate.Version,
+            /*aggregate.Version*/1,
             changes);
 
         aggregate.ClearEvents();

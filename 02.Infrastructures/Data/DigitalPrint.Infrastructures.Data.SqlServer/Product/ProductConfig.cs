@@ -12,6 +12,7 @@ public class ProductConfig : IEntityTypeConfiguration<Core.Domain.Products.Entit
         builder.Property(c => c.CreatorId).HasConversion(c => c.Value.ToString(), d => UserId.FromString(d));
         builder.Property(c => c.Title).HasConversion(c => c.Value, d => ProductTitle.FromString(d));
         builder.Property(c => c.Description).HasConversion(c => c.Value, d => ProductDescription.FromString(d));
+        builder.Property(c => c.Category).HasConversion(c => c.Value, d => ProductCategory.FromString(d));
 
     }
 }

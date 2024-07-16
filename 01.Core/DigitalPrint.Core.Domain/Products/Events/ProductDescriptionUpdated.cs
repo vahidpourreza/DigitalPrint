@@ -1,10 +1,10 @@
-﻿using Framework.Domain.Events;
+﻿//using Framework.Domain.Events;
 
-namespace DigitalPrint.Core.Domain.Products.Events;
+//namespace DigitalPrint.Core.Domain.Products.Events;
 
-public class ProductDescriptionUpdated : IEvent
-{
-    public Guid Id { get; set; }
-    public string Description { get; set; }
+//public class ProductDescriptionUpdated : IEvent
+//{
+//    public Guid Id { get; set; }
+//    public string Description { get; set; }
 
-}
+//}

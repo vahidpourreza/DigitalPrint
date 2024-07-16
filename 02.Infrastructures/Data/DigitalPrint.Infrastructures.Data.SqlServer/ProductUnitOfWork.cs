@@ -19,7 +19,7 @@ public class ProductUnitOfWork : IUnitOfWork
     {
         var entityForSave = GetEntityForSave();
         int result = _productDbContext.SaveChanges();
-        SaveEvents(entityForSave);
+        //SaveEvents(entityForSave);
         return result;
     }
 

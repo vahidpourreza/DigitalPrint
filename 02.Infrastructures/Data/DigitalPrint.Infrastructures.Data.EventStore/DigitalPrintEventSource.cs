@@ -13,7 +13,7 @@ namespace DigitalPrint.Infrastructures.Data.EventStore
         public DigitalPrintEventSource(IEventStoreConnection connection)
         {
             _connection = connection;
-            _connection.ConnectAsync().Wait();
+          //  _connection.ConnectAsync().Wait();
         }
         public void Save<TEvent>(string aggregateName, string streamId, IEnumerable<TEvent> events) where TEvent : IEvent
         {
