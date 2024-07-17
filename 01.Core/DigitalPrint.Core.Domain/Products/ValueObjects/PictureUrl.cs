@@ -22,5 +22,5 @@ public class PictureUrl : BaseValueObject<PictureUrl>
     public override int ObjectGetHashCode() => Url.GetHashCode();
     public override bool ObjectIsEqual(PictureUrl otherObject) => Url == otherObject.Url;
 
-    public static implicit operator string(PictureUrl advertismentText) => advertismentText.Url;
+    public static implicit operator string(PictureUrl url) => url.Url;
 }

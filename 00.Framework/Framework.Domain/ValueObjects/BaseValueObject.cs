@@ -1,7 +1,6 @@
 ﻿namespace Framework.Domain.ValueObjects;
 
-public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
-    where TValueObject : BaseValueObject<TValueObject>
+public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject> where TValueObject : BaseValueObject<TValueObject>
 {
     public override bool Equals(object obj)
     {
@@ -12,7 +11,7 @@ public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
     }
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return ObjectGetHashCode();
     }
     public abstract bool ObjectIsEqual(TValueObject otherObject);
     public abstract int ObjectGetHashCode();

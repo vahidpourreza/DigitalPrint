@@ -8,11 +8,11 @@ namespace DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers
 {
     public class UpdateUserNameHandler : ICommandHandler<UpdateUserName>
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserProfileRepository _userProfileRepository;
         public UpdateUserNameHandler(IUnitOfWork unitOfWork, IUserProfileRepository userProfileRepository)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
             _userProfileRepository = userProfileRepository;
         }
         public void Handle(UpdateUserName command)
@@ -21,7 +21,7 @@ namespace DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers
             if (user == null)
                 throw new InvalidOperationException($"کاربری با شناسه {command.UserId} یافت نشد.");
             user.UpdateName(FirstName.FromString(command.FirstName), LastName.FromString(command.LastName));
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
     }
 }

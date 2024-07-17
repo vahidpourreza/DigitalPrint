@@ -9,11 +9,11 @@ namespace DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers;
 
 public class RegisterUserHandler : ICommandHandler<RegisterUser>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IUserProfileRepository _userProfileRepository;
     public RegisterUserHandler(IUnitOfWork unitOfWork, IUserProfileRepository userProfileRepository)
     {
-        this.unitOfWork = unitOfWork;
+        unitOfWork = unitOfWork;
         _userProfileRepository = userProfileRepository;
     }
     public void Handle(RegisterUser command)
@@ -21,11 +21,10 @@ public class RegisterUserHandler : ICommandHandler<RegisterUser>
         if (_userProfileRepository.Exists(command.UserId))
             throw new InvalidOperationException($"قبلا کاربری با شناسه {command.UserId} ثبت شده است.");
 
-        UserProfile userProfile = new UserProfile(command.UserId,
-            FirstName.FromString(command.FirstName),
-            LastName.FromString(command.LastName),
-            DisplayName.FromString(command.DisplayName));
+        UserProfile userProfile = new UserProfile(command.UserId,FirstName.FromString(command.FirstName),
+                                                  LastName.FromString(command.LastName),
+                                                  DisplayName.FromString(command.DisplayName));
         _userProfileRepository.Add(userProfile);
-        unitOfWork.Commit();
+        _unitOfWork.Commit();
     }
 }

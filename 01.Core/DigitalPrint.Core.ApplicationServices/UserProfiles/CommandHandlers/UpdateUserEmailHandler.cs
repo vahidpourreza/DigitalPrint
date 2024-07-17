@@ -8,11 +8,11 @@ namespace DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers;
 
 public class UpdateUserEmailHandler : ICommandHandler<UpdateUserEmail>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IUserProfileRepository _userProfileRepository;
     public UpdateUserEmailHandler(IUnitOfWork unitOfWork, IUserProfileRepository userProfileRepository)
     {
-        this.unitOfWork = unitOfWork;
+        _unitOfWork = unitOfWork;
         _userProfileRepository = userProfileRepository;
     }
     public void Handle(UpdateUserEmail command)
@@ -21,6 +21,6 @@ public class UpdateUserEmailHandler : ICommandHandler<UpdateUserEmail>
         if (user == null)
             throw new InvalidOperationException($"کاربری با شناسه {command.UserId} یافت نشد.");
         user.UpdateEmail(Email.FromString(command.Email));
-        unitOfWork.Commit();
+        _unitOfWork.Commit();
     }
 }

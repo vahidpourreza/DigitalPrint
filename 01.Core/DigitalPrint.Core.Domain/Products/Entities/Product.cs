@@ -59,7 +59,6 @@ public class Product : BaseAggregateRoot<Guid>
         newPic.HandleEvent(new PictureAddedToProduct()
         {
             PictureId = new Guid(),
-            ClassifiedAdId = Id,
             Url = pictureUri.ToString(),
             Height = size.Height,
             Width = size.Width

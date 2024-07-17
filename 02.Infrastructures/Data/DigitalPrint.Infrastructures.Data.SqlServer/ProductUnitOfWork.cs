@@ -17,7 +17,7 @@ public class ProductUnitOfWork : IUnitOfWork
     }
     public int Commit()
     {
-        var entityForSave = GetEntityForSave();
+       // var entityForSave = GetEntityForSave();
         int result = _productDbContext.SaveChanges();
         //SaveEvents(entityForSave);
         return result;

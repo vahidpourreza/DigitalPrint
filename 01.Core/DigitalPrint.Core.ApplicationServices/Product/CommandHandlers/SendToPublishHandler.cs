@@ -13,8 +13,8 @@ public class SendToPublishHandler : ICommandHandler<SentForPublish>
 
     public SendToPublishHandler(IUnitOfWork unitOfWork, IProductsRepository productsRepository)
     {
-        this._productsRepository = productsRepository;
-        this._unitOfWork = unitOfWork;
+        _productsRepository = productsRepository;
+        _unitOfWork = unitOfWork;
     }
     public void Handle(SentForPublish command)
     {

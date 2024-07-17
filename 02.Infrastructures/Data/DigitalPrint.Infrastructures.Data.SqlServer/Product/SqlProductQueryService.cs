@@ -8,11 +8,11 @@ namespace DigitalPrint.Infrastructures.Data.SqlServer.Product;
 
 public class SqlProductQueryService : IProductQueryService
 {
-    private readonly SqlConnection sqlConnection;
+    private readonly SqlConnection _sqlConnection;
 
     public SqlProductQueryService(SqlConnection sqlConnection)
     {
-        this.sqlConnection = sqlConnection;
+       _sqlConnection = sqlConnection;
     }
 
     public ProductDetail Query(GetActiveProduct query)
@@ -39,7 +39,7 @@ public class SqlProductQueryService : IProductQueryService
                 MIN(pic.[Order]);
         ";
 
-        return sqlConnection.QuerySingleOrDefault<ProductDetail>(sqlQuery, new { query.ProductId });
+        return _sqlConnection.QuerySingleOrDefault<ProductDetail>(sqlQuery, new { query.ProductId });
     }
     public IEnumerable<ProductSummary> Query(GetActiveProductList query)
     {
@@ -63,7 +63,7 @@ public class SqlProductQueryService : IProductQueryService
                        ";
 
 
-        return sqlConnection.Query<ProductSummary>(sqlQuery, new
+        return _sqlConnection.Query<ProductSummary>(sqlQuery, new
         {
             Offset = (query.PageNumber - 1) * query.PageSize,
             PageSize = query.PageSize
@@ -91,7 +91,7 @@ public class SqlProductQueryService : IProductQueryService
                          OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
                      ";
 
-        return sqlConnection.Query<ProductSummary>(sqlQuery, new
+        return _sqlConnection.Query<ProductSummary>(sqlQuery, new
         {
             CreatorUserId = query.CreatorUserId,
             Offset = (query.PageNumber - 1) * query.PageSize,
