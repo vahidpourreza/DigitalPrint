@@ -1,6 +1,6 @@
-﻿using DigitalPrint.Core.Domain.Shared.ValueObjects;
+﻿using DigitalPrint.Core.Domain.UserProfiles.ValueObjects;
+using DigitalPrint.Core.Domain.Shared.ValueObjects;
 using DigitalPrint.Core.Domain.UserProfiles.Events;
-using DigitalPrint.Core.Domain.UserProfiles.ValueObjects;
 using Framework.Domain.Entities;
 using Framework.Domain.Events;
 
@@ -17,11 +17,7 @@ public class UserProfile : BaseAggregateRoot<Guid>
 
     #region Costructurs
     private UserProfile() { }
-
-    public UserProfile(Guid id,
-                      FirstName firstName,
-                      LastName lastName,
-                      DisplayName displayName)
+    public UserProfile(Guid id, FirstName firstName, LastName lastName, DisplayName displayName)
     {
         HandleEvent(new UserRegistered
         {
@@ -33,6 +29,7 @@ public class UserProfile : BaseAggregateRoot<Guid>
     }
     #endregion
 
+    #region Methods
     public void UpdateName(FirstName firstName, LastName lastName)
     {
         HandleEvent(new UserNameUpdated
@@ -42,7 +39,6 @@ public class UserProfile : BaseAggregateRoot<Guid>
             LastName = lastName
         });
     }
-
     public void UpdateDisplayName(DisplayName displayName)
     {
         HandleEvent(new UserDisplayNameUpdated
@@ -51,7 +47,6 @@ public class UserProfile : BaseAggregateRoot<Guid>
             DisplayName = displayName,
         });
     }
-
     public void UpdateEmail(Email email)
     {
         HandleEvent(new UserEmailUpdated
@@ -60,7 +55,6 @@ public class UserProfile : BaseAggregateRoot<Guid>
             Email = email,
         });
     }
-
     protected override void SetStateByEvent(IEvent @event)
     {
         switch (@event)
@@ -85,6 +79,8 @@ public class UserProfile : BaseAggregateRoot<Guid>
                 throw new InvalidOperationException("امکان اجرای عملیات درخواستی وجود ندارد");
         }
     }
+    #endregion
+
 
     protected override void ValidateInvariants()
     {

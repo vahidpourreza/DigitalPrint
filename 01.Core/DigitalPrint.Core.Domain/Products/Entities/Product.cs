@@ -1,11 +1,11 @@
 ﻿using DigitalPrint.Core.Domain.Products.ValueObjects;
-using Framework.Domain.Entities;
-using Framework.Domain.Exceptions;
+using DigitalPrint.Core.Domain.Shared.ValueObjects;
 using DigitalPrint.Core.Domain.Products.Events;
+using DigitalPrint.Core.Domain.Products.Enums;
+using Framework.Domain.Exceptions;
+using Framework.Domain.Entities;
 using Framework.Domain.Events;
 using Framework.Tools.Enums;
-using DigitalPrint.Core.Domain.Products.Enums;
-using DigitalPrint.Core.Domain.Shared.ValueObjects;
 
 namespace DigitalPrint.Core.Domain.Products.Entities;
 
@@ -45,7 +45,7 @@ public class Product : BaseAggregateRoot<Guid>
     }
     #endregion
 
-
+    #region Methods
     public void RequestForPublish()
     {
         HandleEvent(new ProductSentForPublish()
@@ -101,25 +101,27 @@ public class Product : BaseAggregateRoot<Guid>
     }
     protected override void ValidateInvariants()
     {
-        var isValid =
-            Id != null &&
-            CreatorId != null &&
-            (Status switch
+        bool isValid = Id != null && CreatorId != null;
+
+        if (isValid)
+        {
+            switch (Status)
             {
-                ProductStatus.PublishPending =>
-                    Title != null
-                    && Description != null
-                    && Price != null,
-                ProductStatus.Active =>
-                    Title != null
-                    && Description != null
-                    && Price != null
-                    && CreatorId != null,
-                _ => true
-            });
+                case ProductStatus.PublishPending:
+                    isValid = Title != null && Description != null && Price != null && Category != null;
+                    break;
+                case ProductStatus.Active:
+                    isValid = Title != null && Description != null && Price != null && Category != null && CreatorId != null;
+                    break;
+            }
+        }
+
         if (!isValid)
         {
-            throw new InvalidEntityStateException(this, $"مقدار تنظیم شده برای آگهی در وضیعت {Status.GetDescription()} غیر قابل قبول است");
+            throw new InvalidEntityStateException(this, $"مقدار تنظیم شده برای محصول در وضیعت {Status.GetDescription()} غیر قابل قبول است");
         }
     }
+
+    #endregion
+
 }

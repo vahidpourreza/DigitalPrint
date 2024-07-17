@@ -44,23 +44,23 @@ public class SqlProductQueryService : IProductQueryService
     public IEnumerable<ProductSummary> Query(GetActiveProductList query)
     {
         string sqlQuery = @"
-    SELECT 
-        p.Id AS ProductId,
-        p.Title,
-        p.Price,
-        MIN(pic.Location) AS PhotoUrl
-    FROM 
-        products p
-        LEFT JOIN picture pic ON p.Id = pic.ProductId
-    WHERE 
-        p.IsDeleted = 0 AND
-        p.Status = 3
-    GROUP BY 
-        p.Id, p.Title, p.Price, p.CreationDate
-    ORDER BY 
-        p.CreationDate
-    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
-";
+                           SELECT 
+                               p.Id AS ProductId,
+                               p.Title,
+                               p.Price,
+                               MIN(pic.Location) AS PhotoUrl
+                           FROM 
+                               products p
+                               LEFT JOIN picture pic ON p.Id = pic.ProductId
+                           WHERE 
+                               p.IsDeleted = 0 AND
+                               p.Status = 3
+                           GROUP BY 
+                               p.Id, p.Title, p.Price, p.CreationDate
+                           ORDER BY 
+                               p.CreationDate
+                           OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+                       ";
 
 
         return sqlConnection.Query<ProductSummary>(sqlQuery, new
@@ -69,28 +69,27 @@ public class SqlProductQueryService : IProductQueryService
             PageSize = query.PageSize
         });
     }
-
     public IEnumerable<ProductSummary> Query(GetProductForSpecificCreator query)
     {
         string sqlQuery = @"
-        SELECT 
-            p.Id AS ProductId,
-            p.Title,
-            p.Price,
-            MIN(pic.Location) AS PhotoUrl
-        FROM 
-            products p
-            LEFT JOIN picture pic ON p.Id = pic.ProductId
-        WHERE 
-            p.CreatorId = @CreatorUserId AND
-            p.IsDeleted = 0 AND
-            p.Status = 3
-        GROUP BY 
-            p.Id, p.Title, p.Price
-        ORDER BY 
-            p.Id -- Use a stable column for ordering if CreationDate cannot be used directly
-        OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
-    ";
+                         SELECT 
+                             p.Id AS ProductId,
+                             p.Title,
+                             p.Price,
+                             MIN(pic.Location) AS PhotoUrl
+                         FROM 
+                             products p
+                             LEFT JOIN picture pic ON p.Id = pic.ProductId
+                         WHERE 
+                             p.CreatorId = @CreatorUserId AND
+                             p.IsDeleted = 0 AND
+                             p.Status = 3
+                         GROUP BY 
+                             p.Id, p.Title, p.Price
+                         ORDER BY 
+                             p.Id -- Use a stable column for ordering if CreationDate cannot be used directly
+                         OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+                     ";
 
         return sqlConnection.Query<ProductSummary>(sqlQuery, new
         {
