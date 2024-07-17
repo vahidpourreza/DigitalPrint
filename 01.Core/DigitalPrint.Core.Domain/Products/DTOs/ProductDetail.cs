@@ -6,6 +6,6 @@ public class ProductDetail
     public string Title { get; set; }
     public long Price { get; set; }
     public string Description { get; set; }
-    public string SellersDisplayName { get; set; }
+    public string CreatorDisplayName { get; set; }
     public string PhotoUrls { get; set; }
 }

@@ -17,24 +17,87 @@ public class SqlProductQueryService : IProductQueryService
 
     public ProductDetail Query(GetActiveProduct query)
     {
-        string sqlQuery = "Select Top 1 a.Id as 'ProductId'," +
-                          " a.Title,a.Text,p.Location as 'photoUrls', up.DisplayName as 'SellersDisplayName' " +
-                          " FROM Advertisments a " +
-                          " Inner Join Picture p on a.Id = p.AdvertismentId " +
-                          " Inner Join UserProfiles up on a.OwnerId = up.Id" +
-                          " Where State = 2 and " +
-                          " a.Id = @ProductId " +
-                          " Order By p.[Order]";
+        string sqlQuery = @"
+            SELECT TOP 1 
+                p.Id AS ProductId,
+                p.Title,
+                p.Price,
+                p.Description,
+                up.DisplayName AS CreatorDisplayName,
+                STRING_AGG(pic.Location, ',') AS PhotoUrls
+            FROM 
+                Products p
+                INNER JOIN UserProfiles up ON p.CreatorId = up.Id
+                LEFT JOIN Picture pic ON p.Id = pic.ProductId
+            WHERE 
+                p.Id = @ProductId AND
+                p.IsDeleted = 0 AND
+                p.Status = 3
+            GROUP BY 
+                p.Id, p.Title, p.Price, p.Description, up.DisplayName
+            ORDER BY 
+                MIN(pic.[Order]);
+        ";
+
         return sqlConnection.QuerySingleOrDefault<ProductDetail>(sqlQuery, new { query.ProductId });
     }
-
-    public ProductSummary Query(GetActiveProductList query)
+    public IEnumerable<ProductSummary> Query(GetActiveProductList query)
     {
-        throw new NotImplementedException();
+        string sqlQuery = @"
+    SELECT 
+        p.Id AS ProductId,
+        p.Title,
+        p.Price,
+        MIN(pic.Location) AS PhotoUrl
+    FROM 
+        products p
+        LEFT JOIN picture pic ON p.Id = pic.ProductId
+    WHERE 
+        p.IsDeleted = 0 AND
+        p.Status = 3
+    GROUP BY 
+        p.Id, p.Title, p.Price, p.CreationDate
+    ORDER BY 
+        p.CreationDate
+    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+";
+
+
+        return sqlConnection.Query<ProductSummary>(sqlQuery, new
+        {
+            Offset = (query.PageNumber - 1) * query.PageSize,
+            PageSize = query.PageSize
+        });
     }
 
-    public ProductSummary Query(GetProductForSpecificCreator query)
+    public IEnumerable<ProductSummary> Query(GetProductForSpecificCreator query)
     {
-        throw new NotImplementedException();
+        string sqlQuery = @"
+        SELECT 
+            p.Id AS ProductId,
+            p.Title,
+            p.Price,
+            MIN(pic.Location) AS PhotoUrl
+        FROM 
+            products p
+            LEFT JOIN picture pic ON p.Id = pic.ProductId
+        WHERE 
+            p.CreatorId = @CreatorUserId AND
+            p.IsDeleted = 0 AND
+            p.Status = 3
+        GROUP BY 
+            p.Id, p.Title, p.Price
+        ORDER BY 
+            p.Id -- Use a stable column for ordering if CreationDate cannot be used directly
+        OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+    ";
+
+        return sqlConnection.Query<ProductSummary>(sqlQuery, new
+        {
+            CreatorUserId = query.CreatorUserId,
+            Offset = (query.PageNumber - 1) * query.PageSize,
+            PageSize = query.PageSize
+        });
     }
+
 }

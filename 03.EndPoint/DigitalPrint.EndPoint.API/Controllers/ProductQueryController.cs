@@ -15,11 +15,25 @@ namespace DigitalPrint.EndPoint.API.Controllers
             _productQueryService = productQueryService;
         }
 
-        [HttpGet]
+        [HttpGet("active-product")]
         public IActionResult Get([FromQuery] GetActiveProduct request)
         {
-            return new OkObjectResult(_productQueryService.Query(request));
+            var response = _productQueryService.Query(request);
+            return new OkObjectResult(response);
         }
 
+        [HttpGet("active-product-list")]
+        public IActionResult Get([FromQuery] GetActiveProductList request)
+        {
+            var response = _productQueryService.Query(request);
+            return new OkObjectResult(response);
+        }
+
+        [HttpGet("product-for-specific-creator")]
+        public IActionResult Get([FromQuery] GetProductForSpecificCreator request)
+        {
+            var response = _productQueryService.Query(request);
+            return new OkObjectResult(response);
+        }
     }
 }
