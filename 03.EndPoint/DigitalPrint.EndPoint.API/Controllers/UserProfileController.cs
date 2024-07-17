@@ -10,28 +10,18 @@ namespace DigitalPrint.EndPoint.API.Controllers
     public class UserProfileController : Controller
     {
         [HttpPost]
-        public IActionResult Post([FromServices] RegisterUserHandler registerUserHandler, RegisterUser request)
-        {
-            return RequestHandler.HandleRequest(request, registerUserHandler.Handle);
-        }
+        public IActionResult Post([FromServices] RegisterUserHandler registerUserHandler, RegisterUser request) => RequestHandler.HandleRequest(request, registerUserHandler.Handle);
+
         [Route("name")]
         [HttpPut]
-        public IActionResult Put([FromServices] UpdateUserNameHandler updateUserNameHandler, UpdateUserName request)
-        {
-            return RequestHandler.HandleRequest(request, updateUserNameHandler.Handle);
-        }
+        public IActionResult Put([FromServices] UpdateUserNameHandler updateUserNameHandler, UpdateUserName request)=> RequestHandler.HandleRequest(request, updateUserNameHandler.Handle);
+      
         [Route("displayname")]
         [HttpPut]
-        public IActionResult Put([FromServices] UpdateUserDisplayNameHandler updateUserDisplayNameHandler, UpdateUserDisplayName request)
-        {
-            return RequestHandler.HandleRequest(request, updateUserDisplayNameHandler.Handle);
-        }
+        public IActionResult Put([FromServices] UpdateUserDisplayNameHandler updateUserDisplayNameHandler, UpdateUserDisplayName request) => RequestHandler.HandleRequest(request, updateUserDisplayNameHandler.Handle);
 
         [Route("email")]
         [HttpPut]
-        public IActionResult Put([FromServices] UpdateUserEmailHandler updateUserEmailHandler, UpdateUserEmail request)
-        {
-            return RequestHandler.HandleRequest(request, updateUserEmailHandler.Handle);
-        }
+        public IActionResult Put([FromServices] UpdateUserEmailHandler updateUserEmailHandler, UpdateUserEmail request) => RequestHandler.HandleRequest(request, updateUserEmailHandler.Handle);
     }
 }

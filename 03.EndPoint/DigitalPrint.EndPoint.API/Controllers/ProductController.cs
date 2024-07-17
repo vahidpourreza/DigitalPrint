@@ -11,16 +11,10 @@ namespace DigitalPrint.EndPoint.API.Controllers
     public class ProductController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Post([FromServices] CreateHandler createHandler, Create request)
-        {
-            return RequestHandler.HandleRequest(request, createHandler.Handle);
-        }
+        public IActionResult Post([FromServices] CreateHandler createHandler, Create request) => RequestHandler.HandleRequest(request, createHandler.Handle);
 
         [Route("publish")]
         [HttpPut]
-        public IActionResult Put([FromServices]  SendToPublishHandler sendToPublishHandler, SentForPublish request)
-        {
-            return RequestHandler.HandleRequest(request, sendToPublishHandler.Handle);
-        }
+        public IActionResult Put([FromServices]  SendToPublishHandler sendToPublishHandler, SentForPublish request) => RequestHandler.HandleRequest(request, sendToPublishHandler.Handle);
     }
 }

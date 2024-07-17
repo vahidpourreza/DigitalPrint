@@ -1,4 +1,5 @@
-﻿using DigitalPrint.Core.Domain.Products.Data;
+﻿using Azure.Core;
+using DigitalPrint.Core.Domain.Products.Data;
 using DigitalPrint.Core.Domain.Products.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,21 +17,13 @@ namespace DigitalPrint.EndPoint.API.Controllers
         }
 
         [HttpGet("active-product")]
-        public IActionResult Get([FromQuery] GetActiveProduct request)
-        {
-            return new OkObjectResult(_productQueryService.Query(request));
-        }
+        public IActionResult Get([FromQuery] GetActiveProduct request) => new OkObjectResult(_productQueryService.Query(request));
 
         [HttpGet("active-product-list")]
-        public IActionResult Get([FromQuery] GetActiveProductList request)
-        {
-            return new OkObjectResult(_productQueryService.Query(request));
-        }
+        public IActionResult Get([FromQuery] GetActiveProductList request) => new OkObjectResult(_productQueryService.Query(request));
 
         [HttpGet("product-for-specific-creator")]
-        public IActionResult Get([FromQuery] GetProductForSpecificCreator request)
-        {
-            return new OkObjectResult(_productQueryService.Query(request));
-        }
+        public IActionResult Get([FromQuery] GetProductForSpecificCreator request) => new OkObjectResult(_productQueryService.Query(request));
+
     }
 }
