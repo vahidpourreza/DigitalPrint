@@ -18,22 +18,19 @@ namespace DigitalPrint.EndPoint.API.Controllers
         [HttpGet("active-product")]
         public IActionResult Get([FromQuery] GetActiveProduct request)
         {
-            var response = _productQueryService.Query(request);
-            return new OkObjectResult(response);
+            return new OkObjectResult(_productQueryService.Query(request));
         }
 
         [HttpGet("active-product-list")]
         public IActionResult Get([FromQuery] GetActiveProductList request)
         {
-            var response = _productQueryService.Query(request);
-            return new OkObjectResult(response);
+            return new OkObjectResult(_productQueryService.Query(request));
         }
 
         [HttpGet("product-for-specific-creator")]
         public IActionResult Get([FromQuery] GetProductForSpecificCreator request)
         {
-            var response = _productQueryService.Query(request);
-            return new OkObjectResult(response);
+            return new OkObjectResult(_productQueryService.Query(request));
         }
     }
 }

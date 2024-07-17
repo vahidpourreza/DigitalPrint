@@ -1,5 +1,7 @@
 ﻿using DigitalPrint.Core.ApplicationServices.Product.CommandHandlers;
+using DigitalPrint.Core.ApplicationServices.UserProfiles.CommandHandlers;
 using DigitalPrint.Core.Domain.Products.Commands;
+using DigitalPrint.EndPoint.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalPrint.EndPoint.API.Controllers
@@ -9,18 +11,16 @@ namespace DigitalPrint.EndPoint.API.Controllers
     public class ProductController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Post([FromServices] CreateHandler handler, Create request)
+        public IActionResult Post([FromServices] CreateHandler createHandler, Create request)
         {
-            handler.Handle(request);
-            return Ok();
+            return RequestHandler.HandleRequest(request, createHandler.Handle);
         }
 
         [Route("publish")]
         [HttpPut]
-        public IActionResult Put([FromServices]  SendToPublishHandler handler, SentForPublish request)
+        public IActionResult Put([FromServices]  SendToPublishHandler sendToPublishHandler, SentForPublish request)
         {
-            handler.Handle(request);
-            return Ok();
+            return RequestHandler.HandleRequest(request, sendToPublishHandler.Handle);
         }
     }
 }
